@@ -1,0 +1,462 @@
+<meta name="dash-one-writer">
+<style>
+.ks { display: grid; gap: var(--cds-gap-xl); font-family: var(--font-anthropic-sans); color: var(--color-fg); }
+.ks-head { display: grid; gap: var(--cds-gap-sm); max-width: 72ch; }
+.ks-eyebrow { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); letter-spacing: .06em; text-transform: uppercase; margin: 0; }
+.ks-title { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); margin: 0; text-wrap: balance; }
+.ks-lede { font-size: var(--cds-font-size-body); line-height: 1.55; margin: 0; }
+.ks-lede b { font-variant-numeric: tabular-nums; }
+.ks-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: var(--cds-gap-md); }
+.ks-tile { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); display: grid; gap: var(--cds-gap-xs); align-content: start; }
+.ks-tile-label { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); letter-spacing: .04em; text-transform: uppercase; }
+.ks-tile-value { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: 2.1rem; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.ks-tile-value small { font-family: var(--font-anthropic-sans); font-size: var(--cds-font-size-body); color: var(--color-fg-muted); }
+.ks-tile-sub { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); line-height: 1.4; }
+.ks-tile.ks-tone-bad { box-shadow: inset 3px 0 0 var(--color-bad); }
+.ks-tile.ks-tone-warn { box-shadow: inset 3px 0 0 var(--color-warn); }
+.ks-tile.ks-tone-ok { box-shadow: inset 3px 0 0 var(--color-ok); }
+.ks-section { display: grid; gap: var(--cds-gap-md); min-width: 0; }
+.ks-h2 { font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); margin: 0; text-wrap: balance; }
+.ks-note { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin: 0; line-height: 1.45; max-width: 75ch; }
+.ks-two { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--cds-gap-xl); }
+.ks-two > * { min-width: 0; }
+.ks-legend { display: flex; flex-wrap: wrap; gap: var(--cds-gap-sm) var(--cds-gap-md); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.ks-legend span { display: inline-flex; align-items: center; gap: 6px; }
+.ks-sw { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+.ks-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+.ks-timeline { position: relative; min-height: 216px; }
+.ks-timeline svg { display: block; overflow: visible; }
+.ks-timeline text { fill: var(--cds-text-secondary); font-size: var(--cds-font-size-caption); }
+.ks-tip { position: absolute; pointer-events: none; background: var(--cds-surface-popover); border: 1px solid var(--cds-border); box-shadow: var(--cds-shadow-popover); border-radius: var(--cds-radius); padding: 8px 10px; font-size: var(--cds-font-size-caption); max-width: 260px; line-height: 1.4; z-index: 2; }
+.ks-tip strong { display: block; color: var(--color-fg); }
+.ks-tip span { color: var(--cds-text-secondary); }
+.ks-bars { display: grid; gap: var(--cds-gap-sm); min-height: 140px; }
+.ks-bar-row { display: grid; grid-template-columns: minmax(130px, 34%) 1fr auto; gap: var(--cds-gap-sm); align-items: center; font-size: var(--cds-font-size-body); }
+.ks-bar-name small { display: block; color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
+.ks-track { position: relative; height: 14px; background: var(--color-border-line); border-radius: 7px; overflow: hidden; }
+.ks-fill { position: absolute; inset: 0 auto 0 0; border-radius: 7px; }
+.ks-ref { position: absolute; top: -3px; bottom: -3px; width: 2px; background: var(--cds-chart-reference); }
+.ks-num { font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
+.ks-score-list { display: grid; gap: var(--cds-gap-md); min-height: 300px; }
+.ks-score { display: grid; grid-template-columns: minmax(150px, 30%) 1fr auto; gap: var(--cds-gap-xs) var(--cds-gap-md); align-items: center; }
+.ks-score-ev { grid-column: 1 / -1; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); line-height: 1.45; margin: 0; }
+.ks-score-name { font-weight: var(--cds-font-weight-medium); }
+.ks-chip { display: inline-block; font-size: var(--cds-font-size-caption); padding: 1px 8px; border-radius: 999px; border: 1px solid var(--color-border-line); white-space: nowrap; }
+.ks-chip[data-tone="bad"] { color: var(--color-bad); border-color: var(--color-bad); }
+.ks-chip[data-tone="warn"] { color: var(--color-warn); border-color: var(--color-warn); }
+.ks-chip[data-tone="ok"] { color: var(--color-ok); border-color: var(--color-ok); }
+.ks-feat { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--cds-gap-md); }
+.ks-feat-col { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); display: grid; gap: var(--cds-gap-sm); align-content: start; }
+.ks-feat-col h3 { margin: 0; font-size: var(--cds-font-size-body); font-weight: var(--cds-font-weight-medium); display: flex; justify-content: space-between; gap: var(--cds-gap-sm); }
+.ks-feat-col ul { margin: 0; padding-left: 1.1em; display: grid; gap: 4px; font-size: var(--cds-font-size-body); }
+.ks-wrap { overflow-x: auto; }
+.ks-table { width: 100%; border-collapse: collapse; font-size: var(--cds-font-size-body); }
+.ks-table th { text-align: left; font-weight: var(--cds-font-weight-medium); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); text-transform: uppercase; letter-spacing: .04em; padding: 6px 10px 6px 0; border-bottom: 1px solid var(--color-border-line); }
+.ks-table td { padding: 8px 10px 8px 0; border-bottom: 1px solid var(--color-border-line); vertical-align: top; line-height: 1.45; }
+.ks-table td.ks-t { font-variant-numeric: tabular-nums; white-space: nowrap; color: var(--color-fg-muted); }
+.ks-table .ks-min { min-width: 200px; }
+.ks-mark-good { color: var(--color-ok); }
+.ks-mark-bad { color: var(--color-bad); }
+.ks details { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); line-height: 1.5; max-width: 80ch; }
+.ks details summary { cursor: pointer; color: var(--color-fg); }
+[data-dash-source-state=refreshing] { opacity: .5; }
+</style>
+
+<div class="ks">
+  <header class="ks-head" id="summary">
+    <p class="ks-eyebrow">Demo review · {{CUSTOMER}} · {{PRODUCT}} · {{DATE}} · {{DURATION_MIN}} minutes</p>
+    <h1 class="ks-title">{{PRODUCT}} Demo Scorecard</h1>
+    <p class="ks-lede" data-read lang="en-GB">{{LEDE_OPENER}} Overall score <b data-draw="kpi" data-source="kpis" data-field="overall" data-row="0" data-fmt="dec"></b> out of 5. {{SELLER_ORG}} spoke for <b data-draw="kpi" data-source="kpis" data-field="seller_share" data-row="0" data-fmt="pct"></b> of the call, <b data-draw="kpi" data-source="kpis" data-field="proven_live" data-row="0"></b> of <b data-draw="kpi" data-source="kpis" data-field="questions_total" data-row="0"></b> buyer questions were proven on screen, and the real reason {{CUSTOMER}} is buying came out at <b data-draw="kpi" data-source="kpis" data-field="driver_time" data-row="0"></b>.</p>
+  </header>
+
+  <section class="ks-tiles" id="kpis" aria-label="Headline measures">
+    <div class="ks-tile" id="tile-score">
+      <span class="ks-tile-label">Overall demo score</span>
+      <span class="ks-tile-value"><span data-draw="kpi" data-source="kpis" data-field="overall" data-row="0" data-fmt="dec"></span> <small>/ 5</small></span>
+      <span class="ks-tile-sub">Average of the 9 areas scored below. 3 is acceptable.</span>
+    </div>
+    <div class="ks-tile" id="tile-talk">
+      <span class="ks-tile-label">Seller talk share</span>
+      <span class="ks-tile-value"><span data-draw="kpi" data-source="kpis" data-field="seller_share" data-row="0" data-fmt="pct"></span></span>
+      <span class="ks-tile-sub">Buyers spoke <span data-draw="kpi" data-source="kpis" data-field="buyer_share" data-row="0" data-fmt="pct"></span>. A discovery-led demo should leave the buyer far more room.</span>
+    </div>
+    <div class="ks-tile" id="tile-questions">
+      <span class="ks-tile-label">Buyer questions proven live</span>
+      <span class="ks-tile-value"><span data-draw="kpi" data-source="kpis" data-field="proven_live" data-row="0"></span> <small>of <span data-draw="kpi" data-source="kpis" data-field="questions_total" data-row="0"></span></small></span>
+      <span class="ks-tile-sub"><span data-draw="kpi" data-source="kpis" data-field="strong_answers" data-row="0"></span> answered strongly by voice. The rest were unclear, roadmap or failed.</span>
+    </div>
+    <div class="ks-tile" id="tile-failures">
+      <span class="ks-tile-label">Live demo failures</span>
+      <span class="ks-tile-value"><span data-draw="kpi" data-source="kpis" data-field="live_failures" data-row="0"></span></span>
+      <span class="ks-tile-sub">{{FAILURES_NOTE}}</span>
+    </div>
+    <div class="ks-tile" id="tile-driver">
+      <span class="ks-tile-label">Buying driver surfaced at</span>
+      <span class="ks-tile-value"><span data-draw="kpi" data-source="kpis" data-field="driver_time" data-row="0"></span></span>
+      <span class="ks-tile-sub"><span data-draw="kpi" data-source="kpis" data-field="driver_pct" data-row="0" data-fmt="pct"></span> of the way through. {{DRIVER_NOTE}}</span>
+    </div>
+    <div class="ks-tile" id="tile-actions">
+      <span class="ks-tile-label">Next steps with a date</span>
+      <span class="ks-tile-value"><span data-draw="kpi" data-source="kpis" data-field="dated_actions" data-row="0"></span> <small>of <span data-draw="kpi" data-source="kpis" data-field="actions_total" data-row="0"></span></small></span>
+      <span class="ks-tile-sub">{{ACTIONS_NOTE}}</span>
+    </div>
+  </section>
+
+  <section class="ks-section" id="timeline">
+    <h2 class="ks-h2">How the {{DURATION_MIN}} minutes were spent</h2>
+    <div class="ks-legend" aria-label="Legend">
+      <span><i class="ks-sw" data-ptype="Demo"></i>Demo</span>
+      <span><i class="ks-sw" data-ptype="Q&amp;A"></i>Buyer Q&amp;A</span>
+      <span><i class="ks-sw" data-ptype="Discovery"></i>Discovery</span>
+      <span><i class="ks-sw" data-ptype="Close"></i>Next steps</span>
+      <span><i class="ks-dot" style="background: var(--color-ok)"></i>Good moment (above)</span>
+      <span><i class="ks-dot" style="background: var(--color-bad)"></i>Bad moment (below)</span>
+    </div>
+    <div class="ks-timeline" data-draw="timeline" data-source="phases moments"></div>
+    <p class="ks-note">Point at a block or dot for detail. {{TIMELINE_INSIGHT}}</p>
+  </section>
+
+  <div class="ks-two">
+    <section class="ks-section" id="talk-time">
+      <h2 class="ks-h2">Who did the talking</h2>
+      <div class="ks-bars" data-draw="talk" data-source="talk_share"></div>
+      <p class="ks-note">Estimated from the transcript timestamps, with obvious speaker mislabels corrected. Accurate to within a minute or so per person.</p>
+    </section>
+    <section class="ks-section" id="coverage-intro">
+      <h2 class="ks-h2">What the buyer actually saw</h2>
+      <div class="ks-bars" data-draw="featbar" data-source="feature_counts"></div>
+      <p class="ks-note">{{COVERAGE_INSIGHT}} Full list further down.</p>
+    </section>
+  </div>
+
+  <section class="ks-section" id="scorecard">
+    <h2 class="ks-h2">Scorecard by area</h2>
+    <p class="ks-note">Scored 1 to 5 from the transcript. The marker shows 3, the acceptable level. Confidence shows how firmly the transcript supports each score.</p>
+    <div class="ks-score-list" data-draw="scores" data-source="scores"></div>
+  </section>
+
+  <div class="ks-two">
+    <section class="ks-section" id="good-points">
+      <h2 class="ks-h2 ks-mark-good">What went well</h2>
+      <div class="ks-wrap">
+        <table class="ks-table" data-source="moments" data-row-key="id">
+          <thead><tr><th data-field="time">Time</th><th data-field="title">Point</th><th data-field="detail" class="ks-min">Detail</th></tr></thead>
+          <tbody data-draw="moments" data-type="Good"></tbody>
+        </table>
+      </div>
+    </section>
+    <section class="ks-section" id="bad-points">
+      <h2 class="ks-h2 ks-mark-bad">What went badly</h2>
+      <div class="ks-wrap">
+        <table class="ks-table" data-source="moments" data-row-key="id">
+          <thead><tr><th data-field="time">Time</th><th data-field="title">Point</th><th data-field="detail" class="ks-min">Detail</th></tr></thead>
+          <tbody data-draw="moments" data-type="Bad"></tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+
+  <section class="ks-section" id="questions">
+    <h2 class="ks-h2">Every buyer question and how it was handled</h2>
+    <div class="ks-wrap">
+      <table class="ks-table" data-source="questions" data-row-key="time">
+        <thead><tr><th data-field="time">Time</th><th data-field="asked_by">Asked by</th><th data-field="question" class="ks-min">Question</th><th data-field="answer">How answered</th><th data-field="quality">Quality</th><th data-field="note" class="ks-min">What was said</th></tr></thead>
+        <tbody data-draw="questions"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="ks-section" id="features">
+    <h2 class="ks-h2">Feature coverage</h2>
+    <div class="ks-feat">
+      <div class="ks-feat-col">
+        <h3><span class="ks-mark-good">Shown live</span><span data-draw="featcount" data-source="feature_counts" data-field="count" data-where="status=Shown live" data-status="Shown live"></span></h3>
+        <ul data-draw="featlist" data-source="features" data-status="Shown live"></ul>
+      </div>
+      <div class="ks-feat-col">
+        <h3><span class="ks-mark-bad">Failed live</span><span data-draw="featcount" data-source="feature_counts" data-field="count" data-where="status=Failed live" data-status="Failed live"></span></h3>
+        <ul data-draw="featlist" data-source="features" data-status="Failed live"></ul>
+      </div>
+      <div class="ks-feat-col">
+        <h3><span>Told, not shown</span><span data-draw="featcount" data-source="feature_counts" data-field="count" data-where="status=Told, not shown" data-status="Told, not shown"></span></h3>
+        <ul data-draw="featlist" data-source="features" data-status="Told, not shown"></ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="ks-section" id="improvements">
+    <h2 class="ks-h2">How the demo could have been better</h2>
+    <p class="ks-note">In priority order. The first three would have changed the outcome of this call most.</p>
+    <div class="ks-wrap">
+      <table class="ks-table" data-source="improvements" data-row-key="priority">
+        <thead><tr><th data-field="priority">#</th><th data-field="area">Area</th><th data-field="happened" class="ks-min">What happened</th><th data-field="instead" class="ks-min">Do this instead</th></tr></thead>
+        <tbody data-draw="improvements"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="ks-section" id="actions">
+    <h2 class="ks-h2">Agreed actions</h2>
+    <div class="ks-wrap">
+      <table class="ks-table" data-source="actions" data-row-key="action">
+        <thead><tr><th data-field="action" class="ks-min">Action</th><th data-field="owner">Owner</th><th data-field="due">Due</th><th data-field="status">Status</th></tr></thead>
+        <tbody data-draw="actions"></tbody>
+      </table>
+    </div>
+    <p class="ks-note">Recommended now: {{RECOMMENDED_FOLLOWUP}}</p>
+  </section>
+
+  <details id="method">
+    <summary>How this was scored</summary>
+    <p>{{METHOD_NOTE}}</p>
+  </details>
+</div>
+
+<script>
+dash.loader('talk', { description: 'Takes the talk-time list from the assessment file.', fn: ({ answer }) => answer.talk });
+dash.loader('phases', { description: 'Takes the call phases from the assessment file.', fn: ({ answer }) => answer.phases });
+dash.loader('scores', { description: 'Takes the area scores from the assessment file.', fn: ({ answer }) => answer.scores });
+dash.loader('questions', { description: 'Takes the buyer questions from the assessment file.', fn: ({ answer }) => answer.questions });
+dash.loader('moments', { description: 'Takes the good and bad moments from the assessment file.', fn: ({ answer }) => answer.moments });
+dash.loader('features', { description: 'Takes the feature coverage list from the assessment file.', fn: ({ answer }) => answer.features });
+dash.loader('improvements', { description: 'Takes the improvement list from the assessment file.', fn: ({ answer }) => answer.improvements });
+dash.loader('actions', { description: 'Takes the agreed actions from the assessment file.', fn: ({ answer }) => answer.actions });
+
+dash.calc('talk_share', {
+  title: 'Share of talk time',
+  description: 'Each speaker\'s seconds as a percentage of all speaking time.',
+  inputs: ['talk'],
+  fn: (talk) => {
+    const total = talk.reduce((s, r) => s + Number(r.seconds), 0);
+    return talk.map((r) => ({ speaker: r.speaker, org: r.org, side: r.side, role: r.role, seconds: Number(r.seconds), share: Math.round(1000 * r.seconds / total) / 10 }));
+  }
+});
+
+dash.calc('feature_counts', {
+  title: 'Features by how they were covered',
+  description: 'Counts features shown live, failed live, or only described.',
+  inputs: ['features'],
+  fn: (features) => ['Shown live', 'Failed live', 'Told, not shown'].map((status) => ({ status, count: features.filter((f) => f.status === status).length }))
+});
+
+dash.calc('kpis', {
+  title: 'Headline figures',
+  description: 'Overall score, talk share, question handling, failures, driver timing and dated actions.',
+  inputs: ['talk', 'questions', 'scores', 'features', 'moments', 'actions'],
+  fn: (talk, questions, scores, features, moments, actions) => {
+    const total = talk.reduce((s, r) => s + Number(r.seconds), 0);
+    const seller = talk.filter((r) => r.side === 'Seller').reduce((s, r) => s + Number(r.seconds), 0);
+    const driver = moments.find((m) => m.id === 'driver');
+    const avg = scores.reduce((s, r) => s + Number(r.score), 0) / (scores.length || 1);
+    return [{
+      overall: Math.round(avg * 10) / 10,
+      seller_share: Math.round(1000 * seller / total) / 10,
+      buyer_share: Math.round(1000 * (total - seller) / total) / 10,
+      proven_live: questions.filter((q) => q.answer === 'Shown live').length,
+      questions_total: questions.length,
+      strong_answers: questions.filter((q) => q.quality === 'Strong').length,
+      live_failures: features.filter((f) => f.status === 'Failed live').length,
+      driver_time: driver ? driver.time : null,
+      driver_pct: driver ? Math.round(1000 * driver.seconds / total) / 10 : null,
+      dated_actions: actions.filter((a) => a.due).length,
+      actions_total: actions.length
+    }];
+  }
+});
+
+dash.onData(() => {
+  const k = dash.data('kpis');
+  const r = k.status === 'ok' && k.data && k.data[0];
+  const rate = (v, warn, bad, higherIsBad) => v == null ? null : higherIsBad ? (v >= bad ? 'bad' : v >= warn ? 'warn' : 'ok') : (v <= bad ? 'bad' : v <= warn ? 'warn' : 'ok');
+  const tones = r ? {
+    'tile-score': rate(r.overall, 3.4, 2.9, false),
+    'tile-talk': rate(r.seller_share, 55, 65, true),
+    'tile-questions': rate(r.questions_total ? r.proven_live / r.questions_total : null, 0.5, 0.25, false),
+    'tile-failures': rate(r.live_failures, 1, 2, true),
+    'tile-driver': rate(r.driver_pct, 25, 50, true),
+    'tile-actions': rate(r.actions_total ? r.dated_actions / r.actions_total : null, 0.99, 0.49, false)
+  } : {};
+  document.querySelectorAll('.ks-tile[id]').forEach((el) => {
+    el.classList.remove('ks-tone-bad', 'ks-tone-warn', 'ks-tone-ok');
+    if (tones[el.id]) el.classList.add(`ks-tone-${tones[el.id]}`);
+  });
+});
+
+window.ksTypeColour = (t) => ({ 'Demo': dash.colors[0], 'Q&A': dash.colors[1], 'Discovery': dash.colors[2], 'Close': dash.colors[3] })[t] || 'var(--cds-chart-muted)';
+document.querySelectorAll('.ks-sw[data-ptype]').forEach((el) => { el.style.background = window.ksTypeColour(el.dataset.ptype); });
+
+const enc = (v) => String(v).replace(/%/g, '%25').replace(/&/g, '%26').replace(/=/g, '%3D');
+const mk = (tag, props, ...kids) => {
+  const e = document.createElement(tag);
+  Object.entries(props || {}).forEach(([k, v]) => {
+    if (v == null) return;
+    if (k === 'style') e.style.cssText = v;
+    else if (k === 'text') e.textContent = v;
+    else e.setAttribute(k, v);
+  });
+  kids.forEach((c) => { if (c != null) e.append(c); });
+  return e;
+};
+const notOk = (el, ...ids) => {
+  const sts = ids.map((id) => dash.data(id).status);
+  if (sts.every((s) => s === 'ok')) return false;
+  const failed = sts.some((s) => s === 'error' || s === 'missing');
+  el.replaceChildren(failed ? mk('p', { class: 'ks-note', text: 'Failed to load' }) : '');
+  return true;
+};
+const mmss = (s) => `${Math.floor(s / 60)}:${String(Math.round(s % 60)).padStart(2, '0')}`;
+const tone = { 'Strong': 'ok', 'Adequate': 'warn', 'Weak': 'bad', 'Failed live': 'bad', 'Not answered': 'bad', 'Roadmap only': 'warn', 'Verbal - unclear': 'warn', 'Certain': 'ok', 'Likely': 'warn', 'Guessing': 'bad', 'Open': 'warn', 'Declined for now': 'bad' };
+
+dash.draw('kpi', (el) => {
+  const k = dash.data('kpis');
+  if (k.status !== 'ok' || !k.data || !k.data.length) { el.textContent = '-'; return; }
+  const v = k.data[0][el.dataset.field];
+  if (v == null) { el.textContent = '-'; return; }
+  el.textContent = el.dataset.fmt === 'pct' ? `${Math.round(v)}%` : el.dataset.fmt === 'dec' ? Number(v).toFixed(1) : String(v);
+});
+
+dash.draw('talk', (el) => {
+  if (notOk(el, 'talk_share')) return;
+  const rows = dash.data('talk_share').data;
+  const max = d3.max(rows, (r) => r.share) || 1;
+  el.replaceChildren(...rows.map((r) => mk('div', { class: 'ks-bar-row' },
+    mk('span', { class: 'ks-bar-name', text: r.speaker }, mk('small', { text: `${r.org} · ${r.role}` })),
+    mk('span', { class: 'ks-track' }, mk('span', { class: 'ks-fill', style: `width:${100 * r.share / max}%;background:${r.side === 'Seller' ? dash.colors[0] : dash.colors[1]}` })),
+    mk('span', { class: 'ks-num' },
+      mk('span', { 'data-source': 'talk_share', 'data-field': 'share', 'data-where': `speaker=${enc(r.speaker)}`, text: `${r.share}%` }),
+      mk('small', { style: 'color:var(--color-fg-muted)', text: ` · ${mmss(r.seconds)}` })))));
+});
+
+dash.draw('featbar', (el) => {
+  if (notOk(el, 'feature_counts')) return;
+  const rows = dash.data('feature_counts').data;
+  const max = d3.max(rows, (r) => r.count) || 1;
+  const col = { 'Shown live': 'var(--color-ok)', 'Failed live': 'var(--color-bad)', 'Told, not shown': 'var(--cds-chart-muted)' };
+  el.replaceChildren(...rows.map((r) => mk('div', { class: 'ks-bar-row' },
+    mk('span', { class: 'ks-bar-name', text: r.status }),
+    mk('span', { class: 'ks-track' }, mk('span', { class: 'ks-fill', style: `width:${100 * r.count / max}%;background:${col[r.status]}` })),
+    mk('span', { class: 'ks-num', 'data-source': 'feature_counts', 'data-field': 'count', 'data-where': `status=${enc(r.status)}`, text: `${r.count} features` }))));
+});
+
+dash.draw('scores', (el) => {
+  if (notOk(el, 'scores')) return;
+  const rows = dash.data('scores').data;
+  el.replaceChildren(...rows.map((r) => {
+    const s = Number(r.score);
+    const t = s <= 2 ? 'bad' : s === 3 ? 'warn' : 'ok';
+    const w = `dimension=${enc(r.dimension)}`;
+    return mk('div', { class: 'ks-score' },
+      mk('span', { class: 'ks-score-name', text: r.dimension }),
+      mk('span', { class: 'ks-track', role: 'img', 'aria-label': `${r.dimension}: ${s} out of 5` },
+        mk('span', { class: 'ks-fill', style: `width:${s * 20}%;background:var(--color-${t})` }),
+        mk('span', { class: 'ks-ref', style: 'left:calc(60% - 1px)' })),
+      mk('span', { class: 'ks-num' },
+        mk('b', { 'data-source': 'scores', 'data-field': 'score', 'data-where': w, text: String(s) }),
+        mk('span', { style: 'color:var(--color-fg-muted)', text: ' / 5 ' }),
+        mk('span', { class: 'ks-chip', 'data-tone': tone[r.confidence], 'data-source': 'scores', 'data-field': 'confidence', 'data-where': w, text: r.confidence })),
+      mk('p', { class: 'ks-score-ev', 'data-source': 'scores', 'data-field': 'evidence', 'data-where': w, text: r.evidence }));
+  }));
+});
+
+dash.draw('moments', (el) => {
+  const d = dash.data('moments');
+  if (d.status !== 'ok') { el.replaceChildren(); return; }
+  const rows = d.data.filter((m) => m.type === el.dataset.type);
+  el.replaceChildren(...rows.map((m) => mk('tr', { 'data-key': enc(m.id) },
+    mk('td', { class: 'ks-t', text: m.time }), mk('td', {}, mk('b', { text: m.title })), mk('td', { text: m.detail }))));
+});
+
+dash.draw('questions', (el) => {
+  const d = dash.data('questions');
+  if (d.status !== 'ok') { el.replaceChildren(); return; }
+  el.replaceChildren(...d.data.map((q) => mk('tr', {},
+    mk('td', { class: 'ks-t', text: q.time }), mk('td', { text: q.asked_by }), mk('td', { text: q.question }),
+    mk('td', {}, mk('span', { class: 'ks-chip', 'data-tone': tone[q.answer], text: q.answer })),
+    mk('td', {}, mk('span', { class: 'ks-chip', 'data-tone': tone[q.quality], text: q.quality })),
+    mk('td', { text: q.note }))));
+});
+
+dash.draw('featcount', (el) => {
+  const d = dash.data('feature_counts');
+  if (d.status !== 'ok') { el.textContent = '-'; return; }
+  const r = d.data.find((x) => x.status === el.dataset.status);
+  el.textContent = r ? String(r.count) : '0';
+});
+
+dash.draw('featlist', (el) => {
+  const d = dash.data('features');
+  if (d.status !== 'ok') { el.replaceChildren(); return; }
+  el.replaceChildren(...d.data.filter((f) => f.status === el.dataset.status).map((f) =>
+    mk('li', { 'data-source': 'features', 'data-field': 'feature', 'data-where': `feature=${enc(f.feature)}`, text: f.feature })));
+});
+
+dash.draw('improvements', (el) => {
+  const d = dash.data('improvements');
+  if (d.status !== 'ok') { el.replaceChildren(); return; }
+  el.replaceChildren(...d.data.map((r) => mk('tr', {},
+    mk('td', { class: 'ks-t', text: String(r.priority) }), mk('td', {}, mk('b', { text: r.area })), mk('td', { text: r.happened }), mk('td', { text: r.instead }))));
+});
+
+dash.draw('actions', (el) => {
+  const d = dash.data('actions');
+  if (d.status !== 'ok') { el.replaceChildren(); return; }
+  el.replaceChildren(...d.data.map((r) => mk('tr', {},
+    mk('td', { text: r.action }), mk('td', { text: r.owner }),
+    mk('td', {}, mk('span', { class: 'ks-chip', 'data-tone': r.due ? 'ok' : 'bad', text: r.due || 'Not set' })),
+    mk('td', {}, mk('span', { class: 'ks-chip', 'data-tone': tone[r.status], text: r.status })))));
+});
+
+dash.draw('timeline', (el) => {
+  if (notOk(el, 'phases', 'moments')) return;
+  const phases = dash.data('phases').data;
+  const moments = dash.data('moments').data.map((m) => ({ ...m }));
+  const W = Math.max(280, el.clientWidth || 600);
+  const total = d3.max(phases, (p) => Number(p.end_s));
+  const bandY = 84, bandH = 26, step = 14, H = 216;
+  const x = d3.scaleLinear([0, total], [8, W - 8]);
+  ['Good', 'Bad'].forEach((type) => {
+    const lanes = [];
+    moments.filter((m) => m.type === type).sort((a, b) => a.seconds - b.seconds).forEach((m) => {
+      const px = x(m.seconds); let lane = 0;
+      while (lanes[lane] !== undefined && px - lanes[lane] < 16) lane++;
+      lanes[lane] = px; m.lane = lane;
+    });
+  });
+  const tip = mk('div', { class: 'ks-tip', hidden: '' });
+  const show = (ev, title, sub, body) => {
+    tip.replaceChildren(mk('strong', { text: title }), mk('span', { text: sub }), body ? mk('div', { text: body }) : '');
+    tip.hidden = false;
+    const box = el.getBoundingClientRect();
+    const px = ev.clientX - box.left, py = ev.clientY - box.top;
+    const tw = tip.offsetWidth, th = tip.offsetHeight;
+    tip.style.left = `${Math.min(Math.max(0, px - tw / 2), box.width - tw)}px`;
+    tip.style.top = `${py - th - 12 < 0 ? py + 16 : py - th - 12}px`;
+  };
+  const hide = () => { tip.hidden = true; };
+  const svg = d3.create('svg').attr('width', '100%').attr('height', H).attr('viewBox', `0 0 ${W} ${H}`)
+    .attr('role', 'img').attr('aria-label', 'Timeline of the 47-minute call by phase, with good moments above and bad moments below');
+  const every = W < 520 ? 600 : 300;
+  const ticks = d3.range(0, total + 1, every);
+  svg.append('g').selectAll('line').data(ticks).join('line')
+    .attr('x1', (d) => x(d)).attr('x2', (d) => x(d)).attr('y1', 4).attr('y2', H - 22).style('stroke', 'var(--cds-chart-grid)');
+  svg.append('g').selectAll('text').data(ticks).join('text')
+    .attr('x', (d) => x(d)).attr('y', H - 6).attr('text-anchor', (d, i) => i === 0 ? 'start' : 'middle').text((d) => `${d / 60}m`);
+  svg.append('g').selectAll('rect').data(phases).join('rect')
+    .attr('x', (p) => x(p.start_s)).attr('y', bandY).attr('height', bandH).attr('rx', 3)
+    .attr('width', (p) => Math.max(1, x(p.end_s) - x(p.start_s) - 2))
+    .style('fill', (p) => window.ksTypeColour(p.type)).style('cursor', 'default')
+    .on('pointermove', (ev, p) => show(ev, p.label, `${p.type} · ${p.start} to ${p.end}`))
+    .on('pointerleave', hide);
+  const g = svg.append('g').selectAll('g').data(moments).join('g');
+  const cy = (m) => m.type === 'Good' ? bandY - 14 - m.lane * step : bandY + bandH + 14 + m.lane * step;
+  g.append('line').attr('x1', (m) => x(m.seconds)).attr('x2', (m) => x(m.seconds))
+    .attr('y1', (m) => m.type === 'Good' ? bandY : bandY + bandH).attr('y2', cy)
+    .style('stroke', (m) => m.type === 'Good' ? 'var(--color-ok)' : 'var(--color-bad)').style('stroke-width', 1).style('opacity', .6);
+  g.append('circle').attr('cx', (m) => x(m.seconds)).attr('cy', cy).attr('r', 5.5)
+    .style('fill', (m) => m.type === 'Good' ? 'var(--color-ok)' : 'var(--color-bad)')
+    .style('stroke', 'var(--color-bg)').style('stroke-width', 1.5).style('cursor', 'pointer')
+    .on('pointermove pointerdown', (ev, m) => show(ev, m.title, `${m.type === 'Good' ? 'Went well' : 'Went badly'} · ${m.time}`, m.detail))
+    .on('pointerleave', hide);
+  el.replaceChildren(svg.node(), tip);
+});
+</script>

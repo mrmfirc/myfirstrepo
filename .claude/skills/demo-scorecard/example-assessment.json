@@ -1,0 +1,606 @@
+{
+ "meeting": {
+  "title": "K&S - GL Connect Demonstration",
+  "date": "6 November",
+  "duration_s": 2834
+ },
+ "talk": [
+  {
+   "speaker": "Marc McGurk",
+   "org": "SplashBI",
+   "role": "Presales / demo lead",
+   "seconds": 1556,
+   "side": "Seller"
+  },
+  {
+   "speaker": "Daniel Mason",
+   "org": "SplashBI",
+   "role": "Account lead",
+   "seconds": 748,
+   "side": "Seller"
+  },
+  {
+   "speaker": "Vikash Sekharamantri",
+   "org": "Kulicke & Soffa",
+   "role": "IT / data lead",
+   "seconds": 350,
+   "side": "Buyer"
+  },
+  {
+   "speaker": "Mohanapriya Tamilselvan",
+   "org": "Kulicke & Soffa",
+   "role": "Fusion reporting lead",
+   "seconds": 180,
+   "side": "Buyer"
+  }
+ ],
+ "phases": [
+  {
+   "start": "0:00",
+   "end": "5:46",
+   "start_s": 0,
+   "end_s": 346,
+   "type": "Demo",
+   "label": "P&L build and GL Balance formula walkthrough"
+  },
+  {
+   "start": "5:46",
+   "end": "9:54",
+   "start_s": 346,
+   "end_s": 594,
+   "type": "Demo",
+   "label": "Drill-down from P&L to Fusion source, security"
+  },
+  {
+   "start": "9:54",
+   "end": "15:47",
+   "start_s": 594,
+   "end_s": 947,
+   "type": "Demo",
+   "label": "Self-service row add, cost-centre attempt fails"
+  },
+  {
+   "start": "15:47",
+   "end": "17:06",
+   "start_s": 947,
+   "end_s": 1026,
+   "type": "Discovery",
+   "label": "Excel row limits and current workarounds"
+  },
+  {
+   "start": "17:06",
+   "end": "22:59",
+   "start_s": 1026,
+   "end_s": 1379,
+   "type": "Q&A",
+   "label": "EPM budgets, drill-back design, deployment options"
+  },
+  {
+   "start": "22:59",
+   "end": "26:48",
+   "start_s": 1379,
+   "end_s": 1608,
+   "type": "Demo",
+   "label": "Drill templates, shared workbooks, bursting fails"
+  },
+  {
+   "start": "26:48",
+   "end": "31:44",
+   "start_s": 1608,
+   "end_s": 1904,
+   "type": "Q&A",
+   "label": "AI roadmap, why GL Connect over GL Wand"
+  },
+  {
+   "start": "31:44",
+   "end": "38:46",
+   "start_s": 1904,
+   "end_s": 2326,
+   "type": "Discovery",
+   "label": "EBS history, real-time connector, non-finance data"
+  },
+  {
+   "start": "38:46",
+   "end": "47:14",
+   "start_s": 2326,
+   "end_s": 2834,
+   "type": "Close",
+   "label": "Finance demo, pre-brief, requirements, timeline"
+  }
+ ],
+ "scores": [
+  {
+   "dimension": "Preparation and agenda",
+   "score": 2,
+   "confidence": "Likely",
+   "evidence": "No agenda, no recap of the requirements list Priya had already shared, generic demo data instead of a K&S-style P&L."
+  },
+  {
+   "dimension": "Discovery",
+   "score": 2,
+   "confidence": "Certain",
+   "evidence": "The real driver (GL Wand not supported on Fusion, Spreadsheet Server in the frame) came out at 41:45, and only because Vikash volunteered it."
+  },
+  {
+   "dimension": "Fit to the audience",
+   "score": 2,
+   "confidence": "Likely",
+   "evidence": "Two IT and reporting leads attended. The demo was pitched at finance users, and architecture questions were answered verbally with no diagram."
+  },
+  {
+   "dimension": "Demo execution",
+   "score": 2,
+   "confidence": "Certain",
+   "evidence": "Two live failures (cost-centre lookup at 15:00, bursting at 25:49) and a deliberately duplicated row that triggered a warning."
+  },
+  {
+   "dimension": "Handling questions",
+   "score": 3,
+   "confidence": "Likely",
+   "evidence": "Security, deployment and schema answers were clear. EPM, non-finance data and implementation effort were muddled or not answered."
+  },
+  {
+   "dimension": "Differentiation",
+   "score": 2,
+   "confidence": "Likely",
+   "evidence": "'Built for the enterprise' and performance were claimed without proof. GLSense and Spreadsheet Server were never addressed."
+  },
+  {
+   "dimension": "Team coordination",
+   "score": 3,
+   "confidence": "Certain",
+   "evidence": "Daniel rescued the EPM and differentiation answers, but the two sellers contradicted each other on EPM availability and non-finance data."
+  },
+  {
+   "dimension": "Close and next steps",
+   "score": 3,
+   "confidence": "Certain",
+   "evidence": "Won the P&L template and a clear timeline (January execution, June pilot, October go-live). No date booked and the pre-brief was declined."
+  },
+  {
+   "dimension": "Product capability shown",
+   "score": 4,
+   "confidence": "Likely",
+   "evidence": "Drill from P&L to the Fusion invoice in a few clicks, security inheritance, formula consistency warning and fast refresh landed well."
+  }
+ ],
+ "questions": [
+  {
+   "time": "9:19",
+   "seconds": 559,
+   "asked_by": "Priya",
+   "question": "Do users inherit their existing Fusion access?",
+   "answer": "Verbal - clear",
+   "quality": "Strong",
+   "note": "Roles are pulled through, so users see the same data as in Fusion."
+  },
+  {
+   "time": "14:24",
+   "seconds": 864,
+   "asked_by": "Priya",
+   "question": "Can a row combine account and cost centre?",
+   "answer": "Failed live",
+   "quality": "Weak",
+   "note": "Cost-centre list of values errored. Logged as a follow-up action."
+  },
+  {
+   "time": "17:06",
+   "seconds": 1026,
+   "asked_by": "Priya",
+   "question": "Can we show actuals against budgets held in EPM (EPBCS)?",
+   "answer": "Verbal - unclear",
+   "quality": "Weak",
+   "note": "Marc said an EPM version is 'coming'. Daniel then said it is 'available now'."
+  },
+  {
+   "time": "19:25",
+   "seconds": 1165,
+   "asked_by": "Priya",
+   "question": "How does drill-back from the warehouse link into Fusion?",
+   "answer": "Verbal - clear",
+   "quality": "Adequate",
+   "note": "IDs are passed to a hidden URL in the template. Not configurable by end users."
+  },
+  {
+   "time": "21:02",
+   "seconds": 1262,
+   "asked_by": "Vikash",
+   "question": "Does the warehouse sit inside our environment?",
+   "answer": "Verbal - clear",
+   "quality": "Strong",
+   "note": "On-premise, customer OCI or SplashBI-hosted OCI."
+  },
+  {
+   "time": "21:47",
+   "seconds": 1307,
+   "asked_by": "Vikash",
+   "question": "Can it deploy as a separate schema in our existing ADW?",
+   "answer": "Verbal - clear",
+   "quality": "Strong",
+   "note": "Yes, separate schema or separate database."
+  },
+  {
+   "time": "26:48",
+   "seconds": 1608,
+   "asked_by": "Priya",
+   "question": "Do you have AI or chatbot capabilities?",
+   "answer": "Roadmap only",
+   "quality": "Weak",
+   "note": "Coming 'before January', no firm date, nothing to show."
+  },
+  {
+   "time": "28:48",
+   "seconds": 1728,
+   "asked_by": "Vikash",
+   "question": "Why choose GL Connect over GL Wand?",
+   "answer": "Verbal - unclear",
+   "quality": "Weak",
+   "note": "Generic scale and performance claims. No proof, no named comparison."
+  },
+  {
+   "time": "33:08",
+   "seconds": 1988,
+   "asked_by": "Vikash",
+   "question": "Is it one product for EBS history and Fusion data?",
+   "answer": "Verbal - unclear",
+   "quality": "Adequate",
+   "note": "Yes, but the warehouse versus direct connection point was confused."
+  },
+  {
+   "time": "36:37",
+   "seconds": 2197,
+   "asked_by": "Vikash",
+   "question": "Can we combine non-finance data such as sales and work orders?",
+   "answer": "Verbal - unclear",
+   "quality": "Weak",
+   "note": "Daniel said yes. Marc said not in GL Connect, only in the wider SplashBI product."
+  },
+  {
+   "time": "43:26",
+   "seconds": 2606,
+   "asked_by": "Vikash",
+   "question": "How easily can we build and maintain a combined EPM and Fusion model?",
+   "answer": "Not answered",
+   "quality": "Weak",
+   "note": "Turned into a request for K&S requirements instead."
+  }
+ ],
+ "moments": [
+  {
+   "id": "g1",
+   "time": "0:00",
+   "seconds": 0,
+   "type": "Good",
+   "title": "Invites interruptions",
+   "detail": "Set a conversational tone and framed GL Connect as keeping users in familiar Excel."
+  },
+  {
+   "id": "g2",
+   "time": "6:00",
+   "seconds": 360,
+   "type": "Good",
+   "title": "Drill from P&L to Fusion source",
+   "detail": "Balance, journal, subledger and the Fusion invoice in a few clicks. The strongest moment of the call."
+  },
+  {
+   "id": "g3",
+   "time": "9:32",
+   "seconds": 572,
+   "type": "Good",
+   "title": "Clear security answer",
+   "detail": "Fusion roles are inherited, so no second security model to maintain."
+  },
+  {
+   "id": "g4",
+   "time": "12:40",
+   "seconds": 760,
+   "type": "Good",
+   "title": "Mistake turned into a feature",
+   "detail": "The formula consistency warning showed the tool catching a duplicated row."
+  },
+  {
+   "id": "g5",
+   "time": "13:30",
+   "seconds": 810,
+   "type": "Good",
+   "title": "Concrete performance figure",
+   "detail": "About 900 cells refreshed in about 24 seconds on a laptop."
+  },
+  {
+   "id": "g6",
+   "time": "16:24",
+   "seconds": 984,
+   "type": "Good",
+   "title": "Continuation sheets",
+   "detail": "Automatic overflow when Excel's row limit is reached, a real pain for less technical users."
+  },
+  {
+   "id": "g7",
+   "time": "18:04",
+   "seconds": 1084,
+   "type": "Good",
+   "title": "EPM cube flattening",
+   "detail": "Daniel positioned direct EPM reporting as something most tools cannot do."
+  },
+  {
+   "id": "g8",
+   "time": "21:13",
+   "seconds": 1273,
+   "type": "Good",
+   "title": "Flexible deployment",
+   "detail": "On-premise, customer OCI, SplashBI OCI, or a separate schema in their ADW."
+  },
+  {
+   "id": "g9",
+   "time": "31:44",
+   "seconds": 1904,
+   "type": "Good",
+   "title": "Found the EBS history gap",
+   "detail": "Daniel's question exposed that history stays in EBS, opening the EBS plus Fusion story."
+  },
+  {
+   "id": "g10",
+   "time": "34:26",
+   "seconds": 2066,
+   "type": "Good",
+   "title": "Migration utilities",
+   "detail": "Offered tooling to convert existing GL Wand reports, lowering switching cost."
+  },
+  {
+   "id": "g11",
+   "time": "45:31",
+   "seconds": 2731,
+   "type": "Good",
+   "title": "Timeline secured",
+   "detail": "January execution, June pilot, October Big Bang go-live, plus a P&L template."
+  },
+  {
+   "id": "b1",
+   "time": "0:00",
+   "seconds": 0,
+   "type": "Bad",
+   "title": "No agenda or discovery",
+   "detail": "Went straight to screen share with no recap of requirements or check of attendees' roles."
+  },
+  {
+   "id": "b2",
+   "time": "11:30",
+   "seconds": 690,
+   "type": "Bad",
+   "title": "Negative self-framing",
+   "detail": "Called his own role list 'far too many and far too confusing'."
+  },
+  {
+   "id": "b3",
+   "time": "15:00",
+   "seconds": 900,
+   "type": "Bad",
+   "title": "Cost-centre lookup failed",
+   "detail": "Errored on a direct customer question. 'Something I haven't done before'."
+  },
+  {
+   "id": "b4",
+   "time": "16:24",
+   "seconds": 984,
+   "type": "Bad",
+   "title": "Did not know Excel's row limit",
+   "detail": "'250,000 or a million'. The limit is 1,048,576 rows per sheet."
+  },
+  {
+   "id": "b5",
+   "time": "17:32",
+   "seconds": 1052,
+   "type": "Bad",
+   "title": "Contradiction on EPM",
+   "detail": "Marc: a version is coming. Daniel: available now."
+  },
+  {
+   "id": "b6",
+   "time": "25:49",
+   "seconds": 1549,
+   "type": "Bad",
+   "title": "Bursting failed live",
+   "detail": "Moved on without showing an output workbook or schedule."
+  },
+  {
+   "id": "b7",
+   "time": "27:07",
+   "seconds": 1627,
+   "type": "Bad",
+   "title": "AI answer with nothing to show",
+   "detail": "No date, then a long monologue on attitudes to AI."
+  },
+  {
+   "id": "b8",
+   "time": "29:23",
+   "seconds": 1763,
+   "type": "Bad",
+   "title": "Unproven differentiation",
+   "detail": "Enterprise and speed claims with no numbers or references. Competitors not addressed."
+  },
+  {
+   "id": "b9",
+   "time": "37:15",
+   "seconds": 2235,
+   "type": "Bad",
+   "title": "Second contradiction",
+   "detail": "Sellers disagreed on whether non-finance data fits in GL Connect."
+  },
+  {
+   "id": "driver",
+   "time": "41:45",
+   "seconds": 2505,
+   "type": "Bad",
+   "title": "Core driver found late",
+   "detail": "GL Wand end of support on Fusion and Spreadsheet Server surfaced with 5 minutes left."
+  },
+  {
+   "id": "b11",
+   "time": "42:20",
+   "seconds": 2540,
+   "type": "Bad",
+   "title": "Pre-brief declined, no date",
+   "detail": "Request for 30 minutes with a super user was pushed back. No finance demo slot booked."
+  }
+ ],
+ "features": [
+  {
+   "feature": "GL Balance formula builder",
+   "status": "Shown live"
+  },
+  {
+   "feature": "Parameters page",
+   "status": "Shown live"
+  },
+  {
+   "feature": "Custom hierarchy",
+   "status": "Shown live"
+  },
+  {
+   "feature": "Drill-down to Fusion source",
+   "status": "Shown live"
+  },
+  {
+   "feature": "Self-service row add",
+   "status": "Shown live"
+  },
+  {
+   "feature": "Refresh options",
+   "status": "Shown live"
+  },
+  {
+   "feature": "Formula consistency warning",
+   "status": "Shown live"
+  },
+  {
+   "feature": "Drill-down templates",
+   "status": "Shown live"
+  },
+  {
+   "feature": "Shared workbooks",
+   "status": "Shown live"
+  },
+  {
+   "feature": "Dashboard-style workbook",
+   "status": "Shown live"
+  },
+  {
+   "feature": "Account plus cost-centre rows",
+   "status": "Failed live"
+  },
+  {
+   "feature": "Bursting and distribution",
+   "status": "Failed live"
+  },
+  {
+   "feature": "Continuation sheets",
+   "status": "Told, not shown"
+  },
+  {
+   "feature": "EPM connector",
+   "status": "Told, not shown"
+  },
+  {
+   "feature": "EBS connector",
+   "status": "Told, not shown"
+  },
+  {
+   "feature": "Near real-time Fusion connector",
+   "status": "Told, not shown"
+  },
+  {
+   "feature": "GL Wand migration utilities",
+   "status": "Told, not shown"
+  },
+  {
+   "feature": "AI in GL Connect",
+   "status": "Told, not shown"
+  },
+  {
+   "feature": "Cross-module SplashBI reporting",
+   "status": "Told, not shown"
+  }
+ ],
+ "improvements": [
+  {
+   "priority": 1,
+   "area": "Discovery first",
+   "happened": "Screen share started at 0:00. The buying driver appeared at 41:45.",
+   "instead": "Spend the first 8 to 10 minutes confirming roles, the driver (GL Wand on Fusion), competitors in play (GLSense, Spreadsheet Server) and the decision timeline."
+  },
+  {
+   "priority": 2,
+   "area": "Build on their data",
+   "happened": "Generic Vision P&L. Priya's requirements list was already in hand.",
+   "instead": "Build the demo on a K&S-style P&L and walk their requirements list in order, ticking each off on screen."
+  },
+  {
+   "priority": 3,
+   "area": "Rehearse likely asks",
+   "happened": "Account plus cost-centre and bursting both failed.",
+   "instead": "Dry-run every segment combination and bursting end to end. Keep a recorded backup of each risky flow."
+  },
+  {
+   "priority": 4,
+   "area": "Match the audience",
+   "happened": "IT leads attended a finance-user demo.",
+   "instead": "For IT, lead with a one-page architecture: ADW schema, security, refresh, latency. Save formula-building depth for the finance session."
+  },
+  {
+   "priority": 5,
+   "area": "One voice per answer",
+   "happened": "Two contradictions on EPM and non-finance data.",
+   "instead": "Agree beforehand who answers product, technical and commercial questions. The second speaker adds, never corrects in front of the buyer."
+  },
+  {
+   "priority": 6,
+   "area": "Prove the difference",
+   "happened": "Enterprise and speed claims without evidence.",
+   "instead": "Show a timed refresh at K&S-like volume, name a comparable reference customer and address Spreadsheet Server and GLSense directly."
+  },
+  {
+   "priority": 7,
+   "area": "Know the facts",
+   "happened": "Excel row limit and AI timing were guessed.",
+   "instead": "Carry a fact sheet: limits, connector status, release dates. Say 'I will confirm by Friday' instead of guessing."
+  },
+  {
+   "priority": 8,
+   "area": "Close with a date",
+   "happened": "No finance demo booked, pre-brief declined.",
+   "instead": "Ask for the slot on the call, send a recap within 24 hours with a mutual action plan, and turn the pre-brief into 3 emailed questions."
+  },
+  {
+   "priority": 9,
+   "area": "Drop the apologies",
+   "happened": "About 10 apologies or hedges from the sellers.",
+   "instead": "Replace 'excuse me, on the fly' with a confident line such as 'let me show you the cost-centre version in the follow-up'."
+  }
+ ],
+ "actions": [
+  {
+   "action": "Investigate cost-centre lookup error and update Priya and Vikash",
+   "owner": "Marc (SplashBI)",
+   "due": null,
+   "status": "Open"
+  },
+  {
+   "action": "Confirm finance and P&A availability, propose slots",
+   "owner": "Vikash (K&S)",
+   "due": null,
+   "status": "Open"
+  },
+  {
+   "action": "Email P&L template so the demo can be tailored",
+   "owner": "Priya (K&S)",
+   "due": null,
+   "status": "Open"
+  },
+  {
+   "action": "30-minute pre-brief with a finance super user",
+   "owner": "Daniel (SplashBI)",
+   "due": null,
+   "status": "Declined for now"
+  }
+ ]
+}
